@@ -163,10 +163,10 @@
     function checkMCQ(selected, correct) {
       const feedback = document.getElementById("mcqFeedback");
       if (selected === correct) {
-        feedback.innerText = "Correct – strong BLT-H structure.";
+        feedback.innerText = "Correct – this adds to a strong BLT-H paragraph.";
         feedback.className = "feedback correct";
       } else {
-        feedback.innerText = "Incorrect – watch for weak logic or poor evaluation.";
+        feedback.innerText = "Try again! – watch out for weak evaluation.";
         feedback.className = "feedback incorrect";
       }
       document.getElementById("mcqNextBtn").style.display = "block";
