@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Economics Essay Builder Quiz</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 0;
+			padding: 20px;
+			background-color: #f4f4f4;
+			color: #333;
+		}
+		h1, h2 {
+			color: #2c3e50;
+			text-align: center;
+		}
+		.quiz-container {
+			max-width: 800px;
+			margin: 0 auto;
+			background: white;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		}
+		.question {
+			margin-bottom: 30px;
+			padding: 15px;
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 0 5px rgba(0,0,0,0.1);
+		}
+		.components {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 15px;
+		}
+		.component {
+			padding: 10px;
+			background: #e8f4fc;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: all 0.3s;
+			border: 1px solid #3498db;
+		}
+		.component:hover {
+			background: #d4e6f1;
+		}
+		.selected {
+			background: #d4edda;
+			border-color: #28a745;
+		}
+		.incorrect {
+			background: #f8d7da;
+			border-color: #dc3545;
+		}
+		.answer-area {
+			min-height: 100px;
+			margin-top: 15px;
+			padding: 10px;
+			background: #f9f9f9;
+			border-radius: 4px;
+			border: 1px dashed #6c757d;
+		}
+		.check-btn, .reset-btn {
+			background: #3498db;
+			color: white;
+			border: none;
+			padding: 8px 15px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+		.check-btn:hover, .reset-btn:hover {
+			background: #2980b9;
+		}
+		.reset-btn {
+			background: #6c757d;
+			margin-left: 10px;
+		}
+		.reset-btn:hover {
+			background: #5a6268;
+		}
+		.feedback {
+			margin-top: 10px;
+			padding: 10px;
+			border-radius: 4px;
+			display: none;
+		}
+		.correct-feedback {
+			background: #d4edda;
+			color: #155724;
+		}
+		.incorrect-feedback {
+			background: #f8d7da;
+			color: #721c24;
+		}
+		.score {
+			text-align: center;
+			font-size: 1.2em;
+			margin: 20px 0;
+			font-weight: bold;
+		}
+		.paper-date {
+			font-style: italic;
+			color: #6c757d;
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Economics Essay Builder Quiz</h1>
+	<h2>Select the best components for each evaluation question</h2>
+	
+	<div class="quiz-container">
+		<div class="score">Score: <span id="score">0</span>/20</div>
+		
+		<!-- 2018 Paper 1 -->
+		<div class="question">
+			<div class="paper-date">2018 Paper 1</div>
+			<h3>Question 1: Evaluate the impact of introducing e-commerce on a small clothing retailer</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q1')">Because: E-commerce enables access to wider markets</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">Because: Many customers increasingly prefer online shopping</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">Leads to: Potential for increased sales beyond local area</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">Leads to: Possible reduction in foot traffic to physical stores</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">Therefore: Business may achieve growth with proper digital strategy</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">Therefore: Physical stores will likely become unnecessary</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">However: Requires investment in digital skills and infrastructure</div>
+				<div class="component" onclick="selectComponent(this, 'q1')">However: Online competition can be intense for small retailers</div>
+			</div>
+			<div class="answer-area" id="q1-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q1', ['Because: E-commerce enables access to wider markets', 'Leads to: Potential for increased sales beyond local area', 'Therefore: Business may achieve growth with proper digital strategy', 'However: Requires investment in digital skills and infrastructure'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q1')">Reset</button>
+			<div class="feedback correct-feedback" id="q1-correct">Correct! These components provide a balanced evaluation.</div>
+			<div class="feedback incorrect-feedback" id="q1-incorrect">Not quite. The best evaluation considers both opportunities and requirements.</div>
+		</div>
+
+		<!-- 2018 Paper 2 -->
+		<div class="question">
+			<div class="paper-date">2018 Paper 2</div>
+			<h3>Question 2: Evaluate the impact of raising prices on a business</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q2')">Because: Higher prices can improve per-unit profitability</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">Because: Some customer segments are less price-sensitive</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">Leads to: Possible margin improvement if sales volume stays stable</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">Leads to: Risk of reduced sales volume from price-sensitive customers</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">Therefore: May generate funds for business improvement</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">Therefore: Competitors are likely to follow with similar price increases</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">However: Requires careful market positioning to justify increase</div>
+				<div class="component" onclick="selectComponent(this, 'q2')">However: Customer loyalty might weaken if value isn't perceived</div>
+			</div>
+			<div class="answer-area" id="q2-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q2', ['Because: Higher prices can improve per-unit profitability', 'Leads to: Possible margin improvement if sales volume stays stable', 'Therefore: May generate funds for business improvement', 'However: Requires careful market positioning to justify increase'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q2')">Reset</button>
+			<div class="feedback correct-feedback" id="q2-correct">Correct! This shows understanding of pricing strategy complexities.</div>
+			<div class="feedback incorrect-feedback" id="q2-incorrect">Not quite. Pricing decisions require balancing multiple factors.</div>
+		</div>
+
+		<!-- 2019 Paper 1 -->
+		<div class="question">
+			<div class="paper-date">2019 Paper 1</div>
+			<h3>Question 3: Evaluate the impact of sustainable product lines</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q3')">Because: Eco-conscious consumers value sustainable options</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">Because: Sustainability can lead to long-term cost efficiencies</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">Leads to: Potential for market differentiation</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">Leads to: Possible increase in production costs initially</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">Therefore: May enhance brand reputation over time</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">Therefore: Will immediately attract all environmentally-aware consumers</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">However: Requires authentic commitment to avoid greenwashing</div>
+				<div class="component" onclick="selectComponent(this, 'q3')">However: Price premiums may limit some customer segments</div>
+			</div>
+			<div class="answer-area" id="q3-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q3', ['Because: Eco-conscious consumers value sustainable options', 'Leads to: Potential for market differentiation', 'Therefore: May enhance brand reputation over time', 'However: Requires authentic commitment to avoid greenwashing'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q3')">Reset</button>
+			<div class="feedback correct-feedback" id="q3-correct">Correct! Sustainable business requires balancing ethics and economics.</div>
+			<div class="feedback incorrect-feedback" id="q3-incorrect">Not quite. Consider both the benefits and requirements of sustainability.</div>
+		</div>
+
+		<!-- 2019 Paper 2 -->
+		<div class="question">
+			<div class="paper-date">2019 Paper 2</div>
+			<h3>Question 4: Evaluate the impact of poor customer service</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q4')">Because: Poor service leads to negative customer experiences</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">Because: All customers will complain about poor service</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">Leads to: Damage to brand reputation and customer loyalty</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">Leads to: Immediate loss of all customers</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">Therefore: May result in declining sales and market share</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">Therefore: Will automatically improve if prices are lowered</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">However: Quick resolution can sometimes restore customer trust</div>
+				<div class="component" onclick="selectComponent(this, 'q4')">However: Some customer segments are more tolerant of poor service</div>
+			</div>
+			<div class="answer-area" id="q4-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q4', ['Because: Poor service leads to negative customer experiences', 'Leads to: Damage to brand reputation and customer loyalty', 'Therefore: May result in declining sales and market share', 'However: Quick resolution can sometimes restore customer trust'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q4')">Reset</button>
+			<div class="feedback correct-feedback" id="q4-correct">Correct! Customer service impacts have lasting effects.</div>
+			<div class="feedback incorrect-feedback" id="q4-incorrect">Not quite. Consider both the impacts and potential remedies.</div>
+		</div>
+
+		<!-- 2020 Paper 1 -->
+		<div class="question">
+			<div class="paper-date">2020 Paper 1</div>
+			<h3>Question 5: Evaluate the impact of part-time contracts</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q5')">Because: Part-time staff provide scheduling flexibility</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">Because: All employees prefer part-time arrangements</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">Leads to: Lower fixed labor costs but potential training challenges</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">Leads to: Automatic improvement in service quality</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">Therefore: Can help match staffing to demand fluctuations</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">Therefore: Eliminates all staffing problems</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">However: May reduce employee engagement and loyalty</div>
+				<div class="component" onclick="selectComponent(this, 'q5')">However: Customers always notice when staff are part-time</div>
+			</div>
+			<div class="answer-area" id="q5-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q5', ['Because: Part-time staff provide scheduling flexibility', 'Leads to: Lower fixed labor costs but potential training challenges', 'Therefore: Can help match staffing to demand fluctuations', 'However: May reduce employee engagement and loyalty'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q5')">Reset</button>
+			<div class="feedback correct-feedback" id="q5-correct">Correct! Workforce flexibility requires careful management.</div>
+			<div class="feedback incorrect-feedback" id="q5-incorrect">Not quite. Consider both operational benefits and human resource factors.</div>
+		</div>
+
+		<!-- Continue with additional questions in chronological order -->
+		<!-- 2020 Paper 2 -->
+		<div class="question">
+			<div class="paper-date">2020 Paper 2</div>
+			<h3>Question 6: Evaluate the impact of business expansion</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q6')">Because: Expansion can increase market share</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">Because: All new locations perform equally well</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">Leads to: Higher potential revenues but increased complexity</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">Leads to: Automatic doubling of profits</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">Therefore: May achieve economies of scale</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">Therefore: Eliminates all business risks</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">However: Requires significant capital investment</div>
+				<div class="component" onclick="selectComponent(this, 'q6')">However: Management attention becomes diluted</div>
+			</div>
+			<div class="answer-area" id="q6-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q6', ['Because: Expansion can increase market share', 'Leads to: Higher potential revenues but increased complexity', 'Therefore: May achieve economies of scale', 'However: Requires significant capital investment'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q6')">Reset</button>
+			<div class="feedback correct-feedback" id="q6-correct">Correct! Expansion offers opportunities but requires resources.</div>
+			<div class="feedback incorrect-feedback" id="q6-incorrect">Not quite. Consider both growth potential and operational challenges.</div>
+		</div>
+
+		<!-- 2021 Paper 1 -->
+		<div class="question">
+			<div class="paper-date">2021 Paper 1</div>
+			<h3>Question 7: Evaluate the impact of social media marketing</h3>
+			<p>Select the 4 best components for this evaluation:</p>
+			<div class="components">
+				<div class="component" onclick="selectComponent(this, 'q7')">Because: Social media enables direct customer engagement</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">Because: All social media posts go viral</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">Leads to: Increased brand awareness but requires constant content</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">Leads to: Guaranteed sales increases</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">Therefore: Can build customer relationships cost-effectively</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">Therefore: Replaces all other marketing channels</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">However: Negative feedback can spread quickly</div>
+				<div class="component" onclick="selectComponent(this, 'q7')">However: Algorithm changes affect visibility unpredictably</div>
+			</div>
+			<div class="answer-area" id="q7-answer"></div>
+			<button class="check-btn" onclick="checkAnswer('q7', ['Because: Social media enables direct customer engagement', 'Leads to: Increased brand awareness but requires constant content', 'Therefore: Can build customer relationships cost-effectively', 'However: Negative feedback can spread quickly'])">Check Answer</button>
+			<button class="reset-btn" onclick="resetQuestion('q7')">Reset</button>
+			<div class="feedback correct-feedback" id="q7-correct">Correct! Social media requires strategic management.</div>
+			<div class="feedback incorrect-feedback" id="q7-incorrect">Not quite. Consider both engagement opportunities and reputation risks.</div>
+		</div>
+
+		<!-- Continue with additional questions through 2023 following same pattern -->
+
+		<button class="reset-btn" style="display: block; margin: 20px auto;" onclick="resetAll()">Reset All Questions</button>
+	</div>
+
+	<script>
+		let score = 0;
+		const selectedComponents = {};
+		
+		// Initialize selectedComponents with all question IDs
+		document.querySelectorAll('.question').forEach((q, index) => {
+			const qId = 'q' + (index + 1);
+			selectedComponents[qId] = [];
+		});
+		
+		function selectComponent(element, questionId) {
+			const answerArea = document.getElementById(`${questionId}-answer`);
+			
+			if (element.classList.contains('selected')) {
+				element.classList.remove('selected');
+				selectedComponents[questionId] = selectedComponents[questionId].filter(
+					item => item !== element.textContent
+				);
+			} else {
+				if (selectedComponents[questionId].length < 4) {
+					element.classList.add('selected');
+					selectedComponents[questionId].push(element.textContent);
+				}
+			}
+			
+			answerArea.innerHTML = selectedComponents[questionId].join('<br>');
+		}
+		
+		function checkAnswer(questionId, correctAnswers) {
+			const userAnswers = selectedComponents[questionId];
+			const correctFeedback = document.getElementById(`${questionId}-correct`);
+			const incorrectFeedback = document.getElementById(`${questionId}-incorrect`);
+			
+			let allCorrect = true;
+			for (const answer of correctAnswers) {
+				if (!userAnswers.includes(answer)) {
+					allCorrect = false;
+					break;
+				}
+			}
+			
+			if (allCorrect && userAnswers.length === correctAnswers.length) {
+				correctFeedback.style.display = 'block';
+				incorrectFeedback.style.display = 'none';
+				score++;
+				document.getElementById('score').textContent = score;
+			} else {
+				correctFeedback.style.display = 'none';
+				incorrectFeedback.style.display = 'block';
+				
+				const components = document.querySelectorAll(`.component`);
+				components.forEach(comp => {
+					if (correctAnswers.includes(comp.textContent)) {
+						comp.classList.add('correct');
+					} else if (!correctAnswers.includes(comp.textContent) && comp.classList.contains('selected')) {
+						comp.classList.add('incorrect');
+					}
+				});
+			}
+		}
+		
+		function resetQuestion(questionId) {
+			selectedComponents[questionId] = [];
+			document.getElementById(`${questionId}-answer`).innerHTML = '';
+			
+			const components = document.querySelectorAll(`.component`);
+			components.forEach(comp => {
+				comp.classList.remove('selected', 'correct', 'incorrect');
+			});
+			
+			document.getElementById(`${questionId}-correct`).style.display = 'none';
+			document.getElementById(`${questionId}-incorrect`).style.display = 'none';
+		}
+		
+		function resetAll() {
+			score = 0;
+			document.getElementById('score').textContent = '0';
+			
+			for (const questionId in selectedComponents) {
+				selectedComponents[questionId] = [];
+				document.getElementById(`${questionId}-answer`).innerHTML = '';
+				
+				document.getElementById(`${questionId}-correct`).style.display = 'none';
+				document.getElementById(`${questionId}-incorrect`).style.display = 'none';
+			}
+			
+			const components = document.querySelectorAll(`.component`);
+			components.forEach(comp => {
+				comp.classList.remove('selected', 'correct', 'incorrect');
+			});
+		}
+	</script>
+</body>
+</html>

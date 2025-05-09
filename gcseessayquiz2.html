@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GCSE Business 12-Mark Understanding Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-size: 20px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      background: #0057b8;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .options button:hover {
+      background: #003f7f;
+    }
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .correct {
+      background-color: #c8e6c9;
+      color: #256029;
+    }
+    .incorrect {
+      background-color: #ffcdd2;
+      color: #c62828;
+    }
+    .next-btn {
+      display: none;
+      margin-top: 20px;
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>GCSE Business 12-Mark Understanding Quiz</h2>
+    <div id="quiz">
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What is a likely advantage of a small business using social media for promotion?",
+        options: [
+          "Because it's low-cost, leads to more exposure, therefore increasing awareness. However, it may not reach older audiences.",
+          "Because it's expensive, leads to less profit, therefore causing losses. However, it may be worth trying.",
+          "Because it uses leaflets, leads to local awareness, therefore helping only in small areas. However, leaflets are often ignored."
+        ],
+        correct: 0
+      },
+      {
+        question: "Why is customer service important for small businesses?",
+        options: [
+          "Because it's only about being friendly, leads to nothing. However, people might like it.",
+          "Because it builds loyalty, leads to repeat sales, therefore increasing success. However, it can be costly to maintain.",
+          "Because it lets customers argue, leads to problems. However, it helps them improve."
+        ],
+        correct: 1
+      },
+      {
+        question: "How can market research help competitiveness?",
+        options: [
+          "Because it helps identify trends, leads to better decision-making, therefore staying ahead. However, it can be expensive.",
+          "Because it replaces marketing, leads to better logos. However, logos don't matter.",
+          "Because it tells people what to buy, leads to instant sales. However, customers don't always listen."
+        ],
+        correct: 0
+      },
+      {
+        question: "What is a drawback of using e-commerce?",
+        options: [
+          "Because it helps with online sales, leads to higher profits. However, more people visit.",
+          "Because it gives access to global markets, leads to expansion. However, too many clicks cause crashes.",
+          "Because it increases competition, leads to pressure on prices. However, it still may grow sales."
+        ],
+        correct: 2
+      },
+      {
+        question: "Why is a strong brand important for a small business?",
+        options: [
+          "Because branding is colourful, leads to attention. However, too much colour can confuse people.",
+          "Because it's memorable, leads to repeat purchases, therefore building loyalty. However, it takes time to develop.",
+          "Because it lets staff wear uniforms, leads to consistency. However, uniforms are costly."
+        ],
+        correct: 1
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function loadQuestion() {
+      const q = quizData[currentIndex];
+      document.getElementById("questionText").innerText = q.question;
+      const optionsBox = document.getElementById("options");
+      const feedback = document.getElementById("feedback");
+      optionsBox.innerHTML = "";
+      feedback.innerHTML = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(i, q.correct);
+        optionsBox.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById("feedback");
+      if (selected === correct) {
+        feedback.innerHTML = "Correct! Well done.";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.innerHTML = "Incorrect. Review the structure of BLT-H.";
+        feedback.className = "feedback incorrect";
+      }
+      document.getElementById("nextBtn").style.display = "block";
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex < quizData.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("quiz").innerHTML = "<h2>Quiz Complete!</h2><p>Great job revising the BLT-H structures.</p>";
+      }
+    }
+
+    // Start the quiz
+    loadQuestion();
+  </script>
+</body>
+</html>

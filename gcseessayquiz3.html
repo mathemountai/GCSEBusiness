@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced GCSE Business BLT-H Quiz</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    h2 {
+      font-size: 20px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      background: #004a99;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .options button:hover {
+      background: #003366;
+    }
+    .feedback {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 5px;
+    }
+    .correct {
+      background-color: #d4edda;
+      color: #256029;
+    }
+    .incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .next-btn {
+      display: none;
+      margin-top: 20px;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Advanced BLT-H Structure Quiz – Edexcel GCSE Business</h2>
+    <div id="quiz">
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "Q1: Discuss the possible advantages and disadvantages to a small business of using social media to promote its products.",
+        options: [
+          "Because social media is free, it leads to guaranteed profit. Therefore, it is risk-free. However, it may distract staff.",
+          "Because social media can target audiences directly, it leads to more cost-effective marketing. Therefore, the business may see a better return on investment. However, it requires regular content to remain effective.",
+          "Because everyone uses social media, it leads to fame. Therefore, the brand will trend. However, likes don’t always equal loyalty."
+        ],
+        correct: 1
+      },
+      {
+        question: "Q2: Evaluate the importance of good customer service to the success of a small business.",
+        options: [
+          "Because good service creates a good impression, it leads to brand awareness. Therefore, people will remember it. However, memory doesn't always lead to sales.",
+          "Because good customer service builds trust, it leads to repeat custom and loyalty. Therefore, the business can grow more sustainably. However, training staff may be costly and time-consuming.",
+          "Because friendly staff help, it leads to nice customers. Therefore, working is easier. However, some customers are rude."
+        ],
+        correct: 1
+      },
+      {
+        question: "Q3: Analyse how a small business could use market research to improve its competitiveness.",
+        options: [
+          "Because market research gives exact answers, it leads to perfect decisions. Therefore, the business will never fail. However, overconfidence could be dangerous.",
+          "Because market research identifies customer preferences, it leads to tailored products. Therefore, the business may gain an advantage over rivals. However, results can become outdated quickly.",
+          "Because research is useful, it leads to good insights. Therefore, decisions improve. However, it's just guessing sometimes."
+        ],
+        correct: 1
+      },
+      {
+        question: "Q4: Discuss the possible benefits and drawbacks to a small business of using e-commerce to sell its products.",
+        options: [
+          "Because e-commerce is online, it leads to global domination. Therefore, all businesses should do it. However, not all do.",
+          "Because e-commerce reduces physical store costs, it leads to higher margins. Therefore, profits can improve. However, tech setup and maintenance may be expensive.",
+          "Because customers buy online, it leads to clicks. Therefore, sales rise. However, clicking is not always buying."
+        ],
+        correct: 1
+      },
+      {
+        question: "Q5: Evaluate the importance of having a strong brand identity for a small business.",
+        options: [
+          "Because branding is expensive, it leads to recognition. Therefore, money well spent. However, some businesses still fail.",
+          "Because strong branding makes the business memorable, it leads to customer loyalty and price inelasticity. Therefore, the firm can increase prices with less risk. However, it takes time and investment to develop a recognisable brand.",
+          "Because brands use colours, it leads to interest. Therefore, people might notice. However, colours fade."
+        ],
+        correct: 1
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function loadQuestion() {
+      const q = quizData[currentIndex];
+      document.getElementById("questionText").innerText = q.question;
+      const optionsBox = document.getElementById("options");
+      const feedback = document.getElementById("feedback");
+      optionsBox.innerHTML = "";
+      feedback.innerHTML = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(i, q.correct);
+        optionsBox.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById("feedback");
+      if (selected === correct) {
+        feedback.innerHTML = "Correct – strong logical BLT-H structure.";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.innerHTML = "Incorrect – watch for weak causality or faulty ‘however’ statements.";
+        feedback.className = "feedback incorrect";
+      }
+      document.getElementById("nextBtn").style.display = "block";
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex < quizData.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("quiz").innerHTML = "<h2>Quiz Complete!</h2><p>Excellent effort. Consider writing your own BLT-H paragraphs next.</p>";
+      }
+    }
+
+    // Start
+    loadQuestion();
+  </script>
+</body>
+</html>

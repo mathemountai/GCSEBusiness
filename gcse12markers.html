@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCSE Business 12-Mark BLT-H Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-size: 18px;
+      color: #333;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #0057b8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    button:hover {
+      background: #003f8a;
+    }
+    .answer {
+      background: #e0f7fa;
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 4px solid #00796b;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="question">Loading question...</h2>
+  <button onclick="showNextPoint()">Show Next BLT-H Point</button>
+  <div class="answer" id="answerBox"></div>
+  <button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<script>
+  const quizData = [
+    {
+      question: "2023: Discuss the possible advantages and disadvantages to a small business of using social media to promote its products.",
+      answers: [
+        "Because social media is low-cost and widely accessible, leads to a small business being able to reach a large audience without spending heavily on advertising, therefore helping increase awareness of its products and potentially growing sales. However, poor content or irregular posting may result in low engagement and reduced effectiveness.",
+        "Because social media allows direct interaction with customers, leads to better customer relationships and targeted promotions, therefore encouraging repeat purchases and loyalty. However, negative feedback or complaints are public and could harm the business’s image."
+      ]
+    },
+    {
+      question: "2022: Evaluate the importance of good customer service to the success of a small business.",
+      answers: [
+        "Because good customer service builds trust and satisfaction, leads to customers returning and recommending the business to others, therefore increasing revenue and contributing to business success. However, it may require training and resources that small businesses struggle to afford.",
+        "Because it helps a small business stand out from competitors, leads to a stronger reputation and competitive advantage, therefore supporting long-term growth. However, if the product or price does not meet customer expectations, good service alone may not be enough."
+      ]
+    },
+    {
+      question: "2021: Analyse how a small business could use market research to improve its competitiveness.",
+      answers: [
+        "Because market research helps identify customer needs and preferences, leads to better product development or pricing strategies, therefore allowing a small business to meet demand more effectively than competitors. However, primary research can be costly and time-consuming.",
+        "Because secondary research provides insights into competitor activity, leads to identifying gaps or trends in the market, therefore enabling a business to position itself more strategically. However, this data may be outdated or too broad to suit the specific business context."
+      ]
+    },
+    {
+      question: "2020: Discuss the possible benefits and drawbacks to a small business of using e-commerce to sell its products.",
+      answers: [
+        "Because e-commerce allows access to customers beyond the local area, leads to a wider customer base and increased sales potential, therefore supporting growth opportunities. However, it also exposes the business to increased competition, especially from larger firms.",
+        "Because selling online can reduce fixed costs such as rent, leads to improved profit margins, therefore making the business more financially sustainable. However, setting up and maintaining an e-commerce platform may require technical knowledge or investment."
+      ]
+    },
+    {
+      question: "2019: Evaluate the importance of having a strong brand identity for a small business.",
+      answers: [
+        "Because a strong brand makes a business easily recognisable, leads to customers being more likely to remember and choose it, therefore helping to build a loyal customer base and increase sales. However, developing a strong brand takes time, effort and money.",
+        "Because brand identity reflects professionalism and trust, leads to increased customer confidence in the business, therefore encouraging positive word-of-mouth. However, poor service or product quality can damage even a strong brand’s reputation."
+      ]
+    }
+  ];
+
+  let currentQuestion = 0;
+  let currentAnswerIndex = 0;
+
+  function loadQuestion() {
+    document.getElementById("question").textContent = quizData[currentQuestion].question;
+    document.getElementById("answerBox").innerHTML = "";
+    currentAnswerIndex = 0;
+  }
+
+  function showNextPoint() {
+    const answerBox = document.getElementById("answerBox");
+    if (currentAnswerIndex < quizData[currentQuestion].answers.length) {
+      const para = document.createElement("p");
+      para.textContent = quizData[currentQuestion].answers[currentAnswerIndex];
+      answerBox.appendChild(para);
+      currentAnswerIndex++;
+    }
+  }
+
+  function nextQuestion() {
+    currentQuestion = (currentQuestion + 1) % quizData.length;
+    loadQuestion();
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>

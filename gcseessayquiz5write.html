@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GCSE Business BLT-H Quiz + Practice</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      background: white;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      font-size: 1.3em;
+      color: #004a99;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 10px 0;
+      background: #004a99;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #003366;
+    }
+    .question-block {
+      margin-bottom: 20px;
+    }
+    .feedback {
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+    .correct {
+      background: #d4edda;
+      color: #256029;
+    }
+    .incorrect {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+    .checklist label {
+      display: block;
+      margin: 5px 0;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GCSE Business BLT-H Practice Quiz</h1>
+
+    <div class="nav-buttons">
+      <button onclick="showMCQ()">1. MCQ Mode</button>
+      <button onclick="showWrite()">2. Write Your Own</button>
+    </div>
+
+    <div id="mcqMode" style="display:none;">
+      <div class="question-block">
+        <h2 id="mcqQuestion"></h2>
+        <div id="mcqOptions"></div>
+        <div id="mcqFeedback" class="feedback"></div>
+        <button id="mcqNextBtn" style="display:none;" onclick="nextMCQ()">Next Question</button>
+      </div>
+    </div>
+
+    <div id="writeMode" style="display:none;">
+      <div class="question-block">
+        <h2 id="writeQuestion"></h2>
+        <textarea id="studentAnswer" placeholder="Write your BLT-H answer here..."></textarea>
+        <button onclick="showChecklist()">Check Structure</button>
+        <div class="checklist" id="bltChecklist" style="display:none;">
+          <h3>Self-Check Your BLT-H:</h3>
+          <label><input type="checkbox"> Clear "Because" statement explaining the reason</label>
+          <label><input type="checkbox"> Logical "Leads to" showing the consequence</label>
+          <label><input type="checkbox"> Strong "Therefore" linking back to the business impact</label>
+          <label><input type="checkbox"> Thoughtful "However" for evaluation/balance</label>
+          <label><input type="checkbox"> Business terminology is applied accurately</label>
+          <label><input type="checkbox"> Specific context or example used</label>
+          <button onclick="nextWrite()">Next Question</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const mcqData = [
+      {
+        question: "Discuss the possible advantages and disadvantages to a small business of using social media to promote its products.",
+        options: [
+          "Because social media is free, it leads to guaranteed profit. Therefore, it is risk-free. However, it may distract staff.",
+          "Because social media can target audiences directly, it leads to more cost-effective marketing. Therefore, the business may see a better return on investment. However, it requires regular content to remain effective.",
+          "Because everyone uses social media, it leads to fame. Therefore, the brand will trend. However, likes don’t always equal loyalty."
+        ],
+        correct: 1
+      },
+      {
+        question: "Evaluate the importance of good customer service to the success of a small business.",
+        options: [
+          "Because good service creates a good impression, it leads to brand awareness. Therefore, people will remember it. However, memory doesn't always lead to sales.",
+          "Because good customer service builds trust, it leads to repeat custom and loyalty. Therefore, the business can grow more sustainably. However, training staff may be costly and time-consuming.",
+          "Because friendly staff help, it leads to nice customers. Therefore, working is easier. However, some customers are rude."
+        ],
+        correct: 1
+      }
+    ];
+
+    const writeQuestions = [
+      "Discuss the possible advantages and disadvantages to a small business of using social media to promote its products.",
+      "Evaluate the importance of good customer service to the success of a small business.",
+      "Analyse how a small business could use market research to improve its competitiveness.",
+      "Discuss the possible benefits and drawbacks to a small business of using e-commerce to sell its products.",
+      "Evaluate the importance of having a strong brand identity for a small business."
+    ];
+
+    let mcqIndex = 0;
+    let writeIndex = 0;
+
+    function showMCQ() {
+      document.getElementById('mcqMode').style.display = 'block';
+      document.getElementById('writeMode').style.display = 'none';
+      loadMCQ();
+    }
+
+    function loadMCQ() {
+      const q = mcqData[mcqIndex];
+      document.getElementById("mcqQuestion").innerText = q.question;
+      const optBox = document.getElementById("mcqOptions");
+      const feedback = document.getElementById("mcqFeedback");
+      optBox.innerHTML = "";
+      feedback.innerHTML = "";
+      document.getElementById("mcqNextBtn").style.display = "none";
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkMCQ(i, q.correct);
+        optBox.appendChild(btn);
+      });
+    }
+
+    function checkMCQ(selected, correct) {
+      const feedback = document.getElementById("mcqFeedback");
+      if (selected === correct) {
+        feedback.innerText = "Correct – strong BLT-H structure.";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.innerText = "Incorrect – watch for weak logic or poor evaluation.";
+        feedback.className = "feedback incorrect";
+      }
+      document.getElementById("mcqNextBtn").style.display = "block";
+    }
+
+    function nextMCQ() {
+      mcqIndex++;
+      if (mcqIndex < mcqData.length) {
+        loadMCQ();
+      } else {
+        document.getElementById("mcqMode").innerHTML = "<h2>MCQ Mode Complete!</h2>";
+      }
+    }
+
+    function showWrite() {
+      document.getElementById('writeMode').style.display = 'block';
+      document.getElementById('mcqMode').style.display = 'none';
+      loadWrite();
+    }
+
+    function loadWrite() {
+      document.getElementById("bltChecklist").style.display = "none";
+      document.getElementById("studentAnswer").value = "";
+      document.getElementById("writeQuestion").innerText = writeQuestions[writeIndex];
+    }
+
+    function showChecklist() {
+      document.getElementById("bltChecklist").style.display = "block";
+    }
+
+    function nextWrite() {
+      writeIndex++;
+      if (writeIndex < writeQuestions.length) {
+        loadWrite();
+      } else {
+        document.getElementById("writeMode").innerHTML = "<h2>Writing Practice Complete!</h2>";
+      }
+    }
+  </script>
+</body>
+</html>
